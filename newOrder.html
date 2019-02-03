@@ -316,6 +316,118 @@
 <script src="dist/js/demo.js"></script>
 <script src="dist/js/in-mem-db.js"></script>
 <script src="dist/js/date-formatter.js"></script>
-<script src="dist/js/order.js"></script>
+<!--<script src="dist/js/order.js"></script>-->
 </body>
+
+<script>
+  function setToday() {
+    var today = new Date();
+    // Just need to parse the format that you need
+    var formattedDate = today.format("yyyy-mm-dd");
+    $("#lblOrderDate").text(formattedDate);
+  }
+
+  setToday();
+
+  function loadCustomerID() {
+    var ajaxCongig={
+      method:"GET",
+      url:"http://localhost:3000/api/v1/customers",
+      async:true,
+      contentType:"application/x-www-form-urlencoded",
+      data:$("form").serialize()
+    };
+    $.ajax(ajaxCongig).done(function (responseText,statusText,jxhr) {
+      for (let i=0;i<responseText.length;i++) {
+        $("#cmbCustomerID").append("<option>"+responseText[i].cId+"</option>");
+      }
+    }).fail(function (jxhr,statusText,error) {
+      console.log("Error");
+    });
+  }
+  loadCustomerID();
+
+  function loadItemCode() {
+    var ajaxCongig={
+      method:"GET",
+      url:"http://localhost:3000/api/v1/items",
+      async:true,
+      contentType:"application/x-www-form-urlencoded",
+      data:$("form").serialize()
+    };
+    $.ajax(ajaxCongig).done(function (responseText,statusText,jxhr) {
+      for (let i=0;i<responseText.length;i++) {
+        $("#cmbItemCode").append("<option>"+responseText[i].itemCode+"</option>");
+      }
+    }).fail(function (jxhr,statusText,error) {
+      console.log("Error");
+    });
+  }
+
+  loadItemCode();
+
+  // console.log($("#cmbItemCode").val());
+
+  $("#cmbCustomerID").change(function () {
+    var customerId = $(this).val();
+    if (!customerId) {
+      // customerName = "";
+      console.log("NULL");
+    } else {
+      console.log("Text");
+
+      var ajaxCongig={
+        method:"GET",
+        url:"http://localhost:3000/api/v1/customers",
+        async:true,
+        contentType:"application/x-www-form-urlencoded",
+        data:$("form").serialize()
+      };
+      $.ajax(ajaxCongig).done(function (responseText,statusText,jxhr) {
+        for (let i=0;i<responseText.length;i++) {
+          if(responseText[i].cId == customerId){
+            $("#lblCustomerName").text(responseText[i].cName);
+          }
+        }
+      }).fail(function (jxhr,statusText,error) {
+        console.log("Error");
+      });
+
+    }
+
+  });
+
+  $("#cmbItemCode").change(function () {
+    var itemId = $(this).val();
+    if (!itemId) {
+      // customerName = "";
+      console.log("NULL");
+    } else {
+      console.log("Text");
+
+      var ajaxCongig={
+        method:"GET",
+        url:"http://localhost:3000/api/v1/items",
+        async:true,
+        contentType:"application/x-www-form-urlencoded",
+        data:$("form").serialize()
+      };
+      $.ajax(ajaxCongig).done(function (responseText,statusText,jxhr) {
+        for (let i=0;i<responseText.length;i++) {
+          if(responseText[i].itemCode == itemId){
+            $("#lblItemDescription").text(responseText[i].description);
+            $("#lblUnitPrice").text(responseText[i].unitPrice);
+            $("#lblQtyOnHand").text(responseText[i].qty);
+          }
+        }
+      }).fail(function (jxhr,statusText,error) {
+        console.log("Error");
+      });
+
+    }
+
+  });
+
+
+</script>
 </html>
