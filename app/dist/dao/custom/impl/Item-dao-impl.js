@@ -74,7 +74,7 @@ var ItemDAOImpl = /** @class */ (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             // console.log(`UPDATE Item SET description = '${entity.description}', qtyOnHand ='${entity.qtyOnHand}', unitPrice ='${entity.unitPrice}' WHERE code='${entity.code}'`);
-            _this.connection.query("UPDATE Item SET description = '" + entity.description + "',unitPrice ='" + entity.unitPrice + "', qty ='" + entity.qtyOnHand + "',  WHERE itemCode='" + entity.code + "'", function (err, results) {
+            _this.connection.query("UPDATE Item SET description = '" + entity.description + "',unitPrice ='" + entity.unitPrice + "', qty ='" + entity.qtyOnHand + "' WHERE itemCode='" + entity.code + "'", function (err, results) {
                 if (err) {
                     reject(err);
                 }

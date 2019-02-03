@@ -97,7 +97,7 @@ export class ItemDAOImpl implements ItemDAO {
         return new Promise((resolve, reject) => {
 
             // console.log(`UPDATE Item SET description = '${entity.description}', qtyOnHand ='${entity.qtyOnHand}', unitPrice ='${entity.unitPrice}' WHERE code='${entity.code}'`);
-            this.connection.query(`UPDATE Item SET description = '${entity.description}',unitPrice ='${entity.unitPrice}', qty ='${entity.qtyOnHand}',  WHERE itemCode='${entity.code}'`,
+            this.connection.query(`UPDATE Item SET description = '${entity.description}',unitPrice ='${entity.unitPrice}', qty ='${entity.qtyOnHand}' WHERE itemCode='${entity.code}'`,
                 (err, results) => {
 
                     if (err) {
