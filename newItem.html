@@ -318,9 +318,9 @@
 
       });
 
-      $("table tbody tr .icon-delete").click(function () {
-        // eventData.stopPropagation();
+      $("table tbody tr .icon-delete").click(function (eventData) {
 
+        eventData.stopPropagation();
         var itemId = $(this).parents("tr").find("td:first-child").text();
         console.log("HII");
         console.log(itemId);
@@ -329,7 +329,7 @@
         if (confirm("Are you sure that you want to delete this item?")) {
           var ajaxConfig = {
             method: "DELETE",
-            url: "http://localhost:3000/api/v1/customers/"+itemId,
+            url: "http://localhost:3000/api/v1/items/"+itemId,
             async: true
           }
           $.ajax(ajaxConfig).done(function (responseText, statusText, jxhr) {
@@ -378,7 +378,7 @@
         $('button[type="reset"]').trigger("click");
       }).fail(function(jxhr,statusText,error){
         alert("Unable to update the Item, try again");
-        console.log(error);
+        // console.log(error);
       });
 
     }else{

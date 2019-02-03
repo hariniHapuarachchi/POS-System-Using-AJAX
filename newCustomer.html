@@ -312,8 +312,8 @@
 
       });
 
-      $("table tbody tr .icon-delete").click(function () {
-        // eventData.stopPropagation();
+      $("table tbody tr .icon-delete").click(function (eventData) {
+        eventData.stopPropagation();
 
         var customerId = $(this).parents("tr").find("td:first-child").text();
         console.log("HII");
