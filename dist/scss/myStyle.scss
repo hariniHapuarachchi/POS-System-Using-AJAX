@@ -1,0 +1,43 @@
+$btn-color :rgb(79, 158, 214); 
+$btnHover-colr:rgb(145, 159, 168);
+$tabBar-color:#516573;
+$back-color:rgb(173, 192, 206);
+
+.addBtn{
+    background-color: $btn-color;
+    display: block;
+    margin: auto;
+    &:hover{
+        background-color: $btnHover-colr;
+    }
+}
+
+.card-header{
+    background-color:$tabBar-color !important;
+}
+.card-primary{
+    background-color:$back-color;
+    
+}
+#item-container>div:last-child{
+    text-align: center;
+}
+
+#btnPlaceOrder{
+    // display: inline-block;
+    // margin-right: 0;
+    float: right;
+    margin-right: 50px;
+    margin-bottom: 7px;
+}
+.icon-delete{
+    width: 48px;
+    height: 48px;
+    background-image: url('../img/recyclebin.png');
+    background-size: contain;
+    background-position: center;
+
+    &:hover:not(.icon-disabled){
+        background-image: url('../img/recyclebin-hover.png');
+    }
+}

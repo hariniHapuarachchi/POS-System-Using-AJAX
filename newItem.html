@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>POS | New Item</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="plugins/morris/morris.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="dist/css/myStyle.css">
+
+  <style>
+    .dataTables_filter {
+      text-align: right !important;
+    }
+
+    .delete{
+      padding: 5px;
+    }
+
+    table tbody tr{
+      cursor: pointer;
+    }
+
+    table tbody tr td{
+      vertical-align: middle !important;
+    }
+
+    .selected-row{
+      background-color: rgba(0, 48, 70, 0.16) !important;
+    }
+  </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="home.html" class="nav-link">Home</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="dist/img/POSLogo.png" alt="POS Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Point Of Sales</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+    
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">
+              <i class="nav-icon fa fa-dashboard"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="newCustomer.html" class="nav-link">
+              <i class="nav-icon fa fa-user"></i>
+              <p>
+                New Customer
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="newItem.html" class="nav-link active">
+              <i class="nav-icon fa fa-plus-circle"></i>
+              <p>
+                New Item
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="newOrder.html" class="nav-link">
+              <i class="nav-icon fa fa-cart-arrow-down"></i>
+              <p>
+                New Order
+              </p>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="viewOrder.html" class="nav-link">
+              <i class="nav-icon fa fa-th"></i>
+              <p>
+                View Orders
+              </p>
+            </a>
+          </li> -->
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">New Item</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active">New Item</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        
+          <!-- Main content -->
+        
+            <div class="container-fluid">
+              <div class="row">
+                <!-- left column -->
+                <div class="col-md-8">
+                  <!-- general form elements -->
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Add Item</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form">
+                      <div class="card-body">
+                          <!-- <div class="card-header"> -->
+                              <button type="button" class="btn addBtn"style="margin-left:0px" id="addNewItem" ><i class="nav-icon fa fa-plus"></i> New Item</button>
+                              <!-- <button type="submit" class="btn addBtn">Delete Customer</button> -->
+                            <!-- </div> -->
+                        <div class="form-group">
+                          <label>Item Code</label>
+                          <input type="text" class="form-control" id="itemCode" placeholder="Enter Item Code">
+                        </div>
+                        <div class="form-group">
+                          <label>Description</label>
+                          <input type="text" class="form-control" id="description" placeholder="Enter Description">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit Price</label>
+                            <input type="text" class="form-control" id="unitPrice" placeholder="Enter Unit Price">
+                          </div>
+                          <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="text" class="form-control" id="txtQty" placeholder="Enter Quantity">
+                          </div>
+                      </div>
+                      <!-- /.card-body -->
+
+                        <div class="card-footer">
+                          <button type="button" id="btnSaveItem" class="btn btn-primary">Save Item</button>
+                          <button type="reset" class="btn btn-primary">Clear ALL</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+                </div>
+                </div>
+              
+                
+                    <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                      <!-- <div class="card-header">
+                        <h3 class="card-title">Bordered Table</h3>
+                      </div> -->
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        <table class="table table-bordered" id="itemTable">
+                          <thead>
+                          <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+                          <tbody>
+                              
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
+                      
+                    </div>
+                    </div> 
+                    </div>
+                    
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.0-alpha
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Morris.js charts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="plugins/morris/morris.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- jvectormap -->
+<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/knob/jquery.knob.js"></script>
+<!-- daterangepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Slimscroll -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!--<script src="dist/js/in-mem-db.js"></script>-->
+<!--<script src="dist/js/item.js"></script>-->
+<script>
+
+  function loadAllItems(){
+    var ajaxConfig={
+      method:"GET",
+      url:"http://localhost:3000/api/v1/items",
+      async:true
+    }
+    $.ajax(ajaxConfig).done(function (responseText,statusText,jxhr) {
+      for (let i=0;i<responseText.length;i++) {
+        $("table tbody").append("<tr><td>"+responseText[i].itemCode+"</td><td>"+responseText[i].description+"</td><td>"+responseText[i].unitPrice+"</td><td>"+responseText[i].qty+"</td><td><div class=\"icon-delete\"></td></tr>");
+      }
+
+
+      $("#itemTable tbody tr").click(function(){
+        $("#itemTable tbody tr").removeClass("selected-row");
+        $(this).addClass("selected-row");
+
+        $("#itemCode").val($(this).find("td:first-child").text());
+        $("#itemCode").attr("disabled",true);
+        $("#btnSaveItem").text("Update Item");
+        $("#description").val($(this).find("td:nth-child(2)").text());
+        $("#unitPrice").val($(this).find("td:nth-child(3)").text());
+        $("#txtQty").val($(this).find("td:nth-child(4)").text());
+
+      });
+
+      $("table tbody tr .icon-delete").click(function () {
+        // eventData.stopPropagation();
+
+        var itemId = $(this).parents("tr").find("td:first-child").text();
+        console.log("HII");
+        console.log(itemId);
+        var row = $(this).parents("tr");
+        console.log("ROW:"+row);
+        if (confirm("Are you sure that you want to delete this item?")) {
+          var ajaxConfig = {
+            method: "DELETE",
+            url: "http://localhost:3000/api/v1/customers/"+itemId,
+            async: true
+          }
+          $.ajax(ajaxConfig).done(function (responseText, statusText, jxhr) {
+            $(row).remove();
+            console.log(responseText);
+          }).fail(function (jxhr, statusText, error) {
+
+          });
+
+        }
+      });
+      console.log(responseText);
+    }).fail(function (jxhr, statusText, error) {
+
+    });
+  }
+  $(document).ready(function () {
+    loadAllItems()
+
+  });
+
+  $("#btnSaveItem").click(function(){
+
+    if ($("#itemCode").attr("disabled")){
+
+      var item = {
+        code: $("#itemCode").val(),
+        description: $("#description").val(),
+        unitPrice: $("#unitPrice").val(),
+        qtyOnHand: $("#txtQty").val()
+      };
+
+      var ajaxConfig = {
+        method: "PUT",
+        url: "http://localhost:3000/api/v1/items/" + $("#itemCode").val(),
+        async: true,
+        contentType: "application/json",
+        data: JSON.stringify(item)
+      }
+
+      $.ajax(ajaxConfig).done(function(response,statusText,jxhr){
+        alert("Updated Successfully");
+        $("tbody tr").remove();
+        loadAllItems();
+        $("#btnSaveItem").text("Save Item");
+        $('button[type="reset"]').trigger("click");
+      }).fail(function(jxhr,statusText,error){
+        alert("Unable to update the Item, try again");
+        console.log(error);
+      });
+
+    }else{
+
+      var item = {
+        code: $("#itemCode").val(),
+        description: $("#description").val(),
+        unitPrice: $("#unitPrice").val(),
+        qtyOnHand: $("#txtQty").val()
+      };
+
+      var ajaxConfig = {
+        method: "POST",
+        url: "http://localhost:3000/api/v1/items/",
+        async: true,
+        contentType: "application/json",
+        data: JSON.stringify(item)
+      }
+
+      $.ajax(ajaxConfig).done(function(response,statusText,jxhr){
+        alert("Added Successfully");
+        $("tbody tr").remove();
+        loadAllItems();
+        $('button[type="reset"]').trigger("click");
+      }).fail(function(jxhr,statusText,error){
+        alert("Unable to save the Item, try again");
+        console.log(error);
+      });
+
+
+    }
+
+  });
+
+  $('button[type="reset"]').click(function(){
+    $("#itemTable tbody tr").removeClass("selected-row");
+    $("#itemCode").attr("disabled",false);
+    $("#btnSaveItem").text("Save Item");
+  });
+</script>
+
+<script>
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
