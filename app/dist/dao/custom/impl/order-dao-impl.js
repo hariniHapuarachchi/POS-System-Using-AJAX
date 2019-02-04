@@ -60,7 +60,7 @@ var OrderDAOImpl = /** @class */ (function () {
     OrderDAOImpl.prototype.update = function (entity) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.connection.query("UPDATE orders SET date = '" + entity.date + "', customerId ='" + entity.customerId + "' WHERE id='" + entity.id + "'", function (err, results) {
+            _this.connection.query("UPDATE orders SET oDate = '" + entity.date + "', customerId ='" + entity.customerId + "' WHERE id='" + entity.id + "'", function (err, results) {
                 if (err) {
                     reject(err);
                 }

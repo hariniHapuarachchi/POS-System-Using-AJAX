@@ -47,7 +47,7 @@ var OrderDetailsDAOImpl = /** @class */ (function () {
     OrderDetailsDAOImpl.prototype.save = function (entity) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.connection.query("INSERT INTO orderdetail VALUES ('" + entity.orderId + "','" + entity.itemCode + "','" + entity.qty + "','" + entity.unitPrice + "')", function (err, results) {
+            _this.connection.query("INSERT INTO orderdetail VALUES ('" + entity.orderId + "','" + entity.itemCode + "','" + entity.qty + "','" + entity.total + "')", function (err, results) {
                 if (err) {
                     reject(err);
                 }
@@ -60,7 +60,7 @@ var OrderDetailsDAOImpl = /** @class */ (function () {
     OrderDetailsDAOImpl.prototype.update = function (entity) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            _this.connection.query("UPDATE orderdetail SET itemCode = '" + entity.itemCode + "', qty ='" + entity.qty + "', unitPrice ='" + entity.unitPrice + "' WHERE orderId='" + entity.orderId + "'", function (err, results) {
+            _this.connection.query("UPDATE orderdetail SET itemCode = '" + entity.itemCode + "', qty ='" + entity.qty + "', unitPrice ='" + entity.total + "' WHERE orderId='" + entity.orderId + "'", function (err, results) {
                 if (err) {
                     reject(err);
                 }

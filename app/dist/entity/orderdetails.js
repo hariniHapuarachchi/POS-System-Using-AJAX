@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var OrderDetails = /** @class */ (function () {
-    function OrderDetails(orderId, itemCode, qty, unitPrice) {
+    function OrderDetails(orderId, itemCode, qty, total) {
         this.orderId = orderId;
         this.itemCode = itemCode;
         this.qty = qty;
-        this.unitPrice = unitPrice;
+        this.total = total;
     }
     return OrderDetails;
 }());
