@@ -74,7 +74,7 @@ export class OrderDAOImpl implements OrdersDAO {
 
     update(entity: Orders): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            this.connection.query(`UPDATE orders SET date = '${entity.date}', customerId ='${entity.customerId}' WHERE id='${entity.id}'`,
+            this.connection.query(`UPDATE orders SET oDate = '${entity.date}', customerId ='${entity.customerId}' WHERE id='${entity.id}'`,
                 (err, results) => {
                     if (err) {
                         reject(err);

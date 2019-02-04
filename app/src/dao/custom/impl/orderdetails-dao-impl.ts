@@ -67,7 +67,7 @@ export class OrderDetailsDAOImpl implements OrderDetailsDAO {
         return new Promise((resolve, reject) => {
 
             this.connection.query(
-                `INSERT INTO orderdetail VALUES ('${entity.orderId}','${entity.itemCode}','${entity.qty}','${entity.unitPrice}')`,
+                `INSERT INTO orderdetail VALUES ('${entity.orderId}','${entity.itemCode}','${entity.qty}','${entity.total}')`,
                 (err, results) => {
 
                     if (err) {
@@ -83,7 +83,7 @@ export class OrderDetailsDAOImpl implements OrderDetailsDAO {
 
     update(entity: OrderDetails): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            this.connection.query(`UPDATE orderdetail SET itemCode = '${entity.itemCode}', qty ='${entity.qty}', unitPrice ='${entity.unitPrice}' WHERE orderId='${entity.orderId}'`,
+            this.connection.query(`UPDATE orderdetail SET itemCode = '${entity.itemCode}', qty ='${entity.qty}', unitPrice ='${entity.total}' WHERE orderId='${entity.orderId}'`,
                 (err, results) => {
 
                     if (err) {
