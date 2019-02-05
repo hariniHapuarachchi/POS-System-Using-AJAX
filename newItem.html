@@ -353,6 +353,96 @@
 
   $("#btnSaveItem").click(function(){
 
+    var itemCode = $("#itemCode").val();
+    var descrptn = $("#description").val();
+    var up = $("#unitPrice").val();
+    var qt = $("#txtQty").val();
+
+    var validdes = /^[A-Za-z]+$/;
+    var validUnit = /^\d+.?\d*$/;
+    var validQt = /^[0-9]+$/;
+    var result1 = validdes.test(descrptn);
+    var result2 = validUnit.test(up);
+    var result3 = validQt.test(qt);
+
+    if (!result1 && !result2 && !result3 && itemCode == "") {
+      alert("Invalid Item");
+      alert("Invalid Description");
+      alert("Invalid Unit Price");
+      alert("Invalid Quantity");
+      $("#itemCode").focus();
+      $("#itemCode").select();
+      pressItemId();
+      pressDes();
+      pressUnit();
+      pressQty();
+      return;
+    }
+
+    if (!result1 && !result2) {
+      alert("Invalid Description");
+      alert("Invalid Unit Price");
+      $("#description").focus();
+      $("#description").select();
+      pressDes();
+      pressUnit();
+
+      return;
+    }
+
+    if (!result1 && !result3) {
+      alert("Invalid Description");
+      alert("Invalid Quantity");
+      $("#description").focus();
+      $("#description").select();
+      pressDes();
+      pressQty();
+      return;
+    }
+
+    if (!result2 && !result3) {
+
+      alert("Invalid Unit Price");
+      alert("Invalid Quantity");
+      $("#unitPrice").focus();
+      $("#unitPrice").select();
+
+      pressUnit();
+      pressQty();
+      return;
+    }
+
+    if (itemCode == "") {
+      alert("Invalid Item");
+      $("#itemCode").focus();
+      $("#itemCode").select();
+      pressItemId();
+      return;
+    }
+
+    if (!result1) {
+      alert("Invalid Description");
+      $("#description").focus();
+      $("#description").select();
+      pressDes();
+      return;
+    }
+
+    if(!result2){
+      alert("Invalid Unit Price");
+      $("#unitPrice").focus();
+      $("#unitPrice").select();
+      pressUnit();
+      return;
+    }
+
+    if(!result3){
+      alert("Invalid Quantity");
+      $("#txtQty").focus();
+      $("#txtQty").select();
+      pressQty();
+      return;
+    }
     if ($("#itemCode").attr("disabled")){
 
       var item = {
@@ -418,19 +508,40 @@
     $("#itemCode").attr("disabled",false);
     $("#btnSaveItem").text("Save Item");
   });
+
+  function pressItemId(){
+    $("#itemCode").css("border","1px solid red");
+
+    $("#itemCode").keypress(function(){
+      $("#itemCode").css("border","1px solid white");
+    });
+  }
+
+  function pressDes(){
+    $("#description").css("border","1px solid red");
+
+    $("#description").keypress(function(){
+      $("#description").css("border","1px solid white");
+    });
+  }
+  function pressUnit(){
+    $("#unitPrice").css("border","1px solid red");
+
+    $("#unitPrice").keypress(function(){
+      $("#unitPrice").css("border","1px solid white");
+    });
+  }
+
+  function pressQty(){
+    $("#txtQty").css("border","1px solid red");
+
+    $("#txtQty").keypress(function(){
+      $("#txtQty").css("border","1px solid white");
+    });
+  }
 </script>
 
-<script>
 
-
-
-
-
-
-
-
-
-</script>
 
 </body>
 </html>

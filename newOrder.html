@@ -176,7 +176,7 @@
                             <label>Quantity</label>
                             <input type="number" class="form-control" id="txtQty" placeholder="Enter Quantity">
                           </div>
-                          
+                      </div>
                       <!-- /.card-body -->
       
                       <div class="card-footer">
@@ -428,6 +428,102 @@
 
   });
 
+  $("#btnAddCart").click(function () {
 
+    var orderDetails = {
+      id:$("#lblOrderId").val(),
+      date:$("#lblOrderDate").text(),
+      customerId:$("#cmbCustomerID").val()
+    }
+    console.log(orderDetails.id);
+    console.log(orderDetails.date);
+    console.log(orderDetails.customerId);
+    var ajaxConfig1 = {
+      method: "POST",
+      url: "http://localhost:3000/api/v1/orders",
+      async: true,
+      contentType: "application/json",
+      data: JSON.stringify(orderDetails)
+    }
+
+    $.ajax(ajaxConfig1).done(function (responseText, statusText, jxhr) {
+     console.log("ADD");
+
+    }).fail(function (jxhr, statusText, error) {
+
+    });
+    var order = {
+      orderId: $("#lblOrderId").val(),
+      itemCode: $("#cmbItemCode").val(),
+      qty: $("#txtQty").val(),
+      total: $("#txtQty").val() * $("#lblUnitPrice").text()
+    };
+
+    console.log(order.orderId);
+    console.log(order.itemCode);
+    console.log(order.qty);
+    console.log(order.total);
+    var ajaxConfig = {
+      method: "POST",
+      url: "http://localhost:3000/api/v1/orderDets",
+      async: true,
+      contentType: "application/json",
+      data: JSON.stringify(order)
+    }
+      console.log("ADD CART");
+      $.ajax(ajaxConfig).done(function (responseText, statusText, jxhr) {
+          for (let i = 0; i < responseText.length; i++) {
+              $("table tbody").append("<tr><td>" + responseText[i].orderId + "</td><td>" + responseText[i].itemCode + "</td><td>" + responseText[i].qty + "</td><td>" + responseText[i].total + "</td><td><div class='icon-delete'></td></tr>");
+          }
+
+          // $("#tblCustomers tbody tr").click(function(){
+          //     $("#tblCustomers tbody tr").removeClass("selected-row");
+          //     $(this).addClass("selected-row");
+          //
+          //     $("#txtCustomerId").val($(this).find("td:first-child").text());
+          //     $("#txtCustomerId").attr("disabled",true);
+          //     $("#btnSave").text("Update Customer");
+          //     $("#txtCustomerName").val($(this).find("td:nth-child(2)").text());
+          //     $("#txtCustomerAddress").val($(this).find("td:nth-child(3)").text());
+          //
+          // });
+
+          // $("table tbody tr .icon-delete").click(function (eventData) {
+          //     eventData.stopPropagation();
+          //
+          //     var customerId = $(this).parents("tr").find("td:first-child").text();
+          //     console.log("HII");
+          //     console.log(customerId);
+          //     var row = $(this).parents("tr");
+          //     console.log("ROW:"+row);
+          //     if (confirm("Are you sure that you want to delete this item?")) {
+          //         var ajaxConfig = {
+          //             method: "DELETE",
+          //             url: "http://localhost:3000/api/v1/customers/"+customerId,
+          //             async: true
+          //         }
+          //         $.ajax(ajaxConfig).done(function (responseText, statusText, jxhr) {
+          //             $(row).remove();
+          //             console.log(responseText);
+          //         }).fail(function (jxhr, statusText, error) {
+          //
+          //         });
+          //
+          //     }
+          // });
+          // console.log(responseText);
+      }).fail(function (jxhr, statusText, error) {
+
+      });
+  });
+
+
+
+  $("#btnPlaceOrder").click(function () {
+    $.ajax({
+      global: true,
+      // the rest of your parameters
+    });
+  });
 </script>
 </html>

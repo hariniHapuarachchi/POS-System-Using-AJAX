@@ -345,7 +345,52 @@
   });
 
   $("#btnSave").click(function(){
+    var customerID = $("#txtCustomerId").val();
+    var customerName = $("#txtCustomerName").val();
+    var customerAdd = $("#txtCustomerAddress").val();
 
+    var validNameAdd = /^[A-Za-z]+$/;
+    var result1 = validNameAdd.test(customerName);
+    var result2 = validNameAdd.test(customerAdd);
+
+    if (!result1 && !result2 && customerID == "") {
+      alert("Invalid Customer ID");
+      $("#txtCustomerId").css("border","1px solid red");
+      $("#txtCustomerName").css("border","1px solid red");
+      $("#txtCustomerAddress").css("border","1px solid red");
+      $("#txtCustomerId").focus();
+      $("#txtCustomerId").select();
+      pressId();
+      pressName();
+      pressAddress();
+      return;
+    }
+
+    if (customerID == "") {
+      alert("Invalid Customer ID");
+      $("#txtCustomerId").css("border","1px solid red");
+      $("#txtCustomerId").focus();
+      $("#txtCustomerId").select();
+      pressId();
+      return;
+    }
+    if (!result1) {
+      alert("Invalid Customer Name");
+      $("#txtCustomerName").css("border","1px solid red");
+      $("#txtCustomerName").focus();
+      $("#txtCustomerName").select();
+      pressName();
+      return;
+    }
+
+    if(!result2){
+      alert("Invalid Customer Address");
+      $("#txtCustomerAddress").css("border","1px solid red");
+      $("#txtCustomerAddress").focus();
+      $("#txtCustomerAddress").select();
+      pressAddress();
+      return;
+    }
     if ($("#txtCustomerId").attr("disabled")){
 
       var customer = {
@@ -410,7 +455,29 @@
     $("#btnSave").text("Save Customer");
   });
 
+  function pressName(){
+    $("#txtCustomerName").css("border","1px solid red");
 
+    $("#txtCustomerName").keypress(function(){
+      $("#txtCustomerName").css("border","1px solid white");
+    });
+
+  }
+  function pressAddress(){
+    $("#txtCustomerAddress").css("border","1px solid red");
+
+    $("#txtCustomerAddress").keypress(function(){
+      $("#txtCustomerAddress").css("border","1px solid white");
+    });
+  }
+
+  function pressId(){
+    $("#txtCustomerId").css("border","1px solid red");
+
+    $("#txtCustomerId").keypress(function(){
+      $("#txtCustomerId").css("border","1px solid white");
+    });
+  }
 </script>
 
 
