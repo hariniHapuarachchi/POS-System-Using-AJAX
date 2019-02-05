@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./app/dist/main.js"
   },
-  "author": "",
+  "author": "Lahiru Sasanka",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

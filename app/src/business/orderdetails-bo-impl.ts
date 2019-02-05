@@ -12,68 +12,206 @@ import {pool} from "../db/db-pool";
 
 export class OrderDertailsBOImpl{
 
-    orderTransaction(customer:CustomerDTO,orders:OrdersDTO,orderDetails:OrderDetailsDTO,item:ItemDTO):Promise<boolean>{
+    findAllOrderDets(): Promise<Array<OrderDetailsDTO>>{
+
         return new Promise((resolve, reject) => {
             pool.getConnection((err, connection) => {
                 if (err){
                     reject(err);
                 }else{
-                    const customerDAO = <CustomerDAO> getDAO(DAOTypes.CUSTOMER, connection);
-                    const itemDAO = <ItemDAO> getDAO(DAOTypes.ITEM, connection);
-                    const orderDAO = <OrdersDAO> getDAO(DAOTypes.ORDERS, connection);
-                    const orderDetailsDAO = <OrderDetailsDAO> getDAO(DAOTypes.ORDERDETAILS, connection);
-                    // connection.beginTransaction(function (err) {
-                    //     if (err) { throw err; }
-                    //     const promise = customerDAO.save(customer);
-                    //     promise.then(result => {
-                    //         pool.releaseConnection(connection);
-                    //     }).catch(error=>{
-                    //         return connection.rollback(function () {
-                    //             reject(error);
-                    //             pool.releaseConnection(connection);
-                    //         })
-                    //     });
-                    // });
-                    // const promise = customerDAO.save(customer);
-                    // const promise1 = itemDAO.save(item);
-                    // const promise2 = orderDAO.save(orders);
-                    // const promise3 = orderDetailsDAO.save(orderDetails);
-                    // promise.then(result => {
-                    //     pool.releaseConnection(connection);
-                    // }).catch(error=>{
-                    //     reject(error);
-                    //     pool.releaseConnection(connection);
-                    // });
-                    const promise = customerDAO.save(customer);
+                    const orderDetDAO = <OrderDetailsDAO> getDAO(DAOTypes.ORDERDETAILS, connection);
+                    const promise = orderDetDAO.findAll();
+                    promise.then(orderDets => {
+                        resolve(orderDets);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    findOrderDet(orderId: string): Promise<Array<OrderDetailsDTO>>{
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const orderDetDAO = <OrderDetailsDAO> getDAO(DAOTypes.ORDERDETAILS, connection);
+                    const promise = orderDetDAO.find(orderId);
+                    promise.then(orderDets => {
+                        resolve(orderDets);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    saveOrderDetails(orderDet: OrderDetailsDTO): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const orderDetDAO = <OrderDetailsDAO> getDAO(DAOTypes.ORDERDETAILS, connection);
+                    const promise = orderDetDAO.save(orderDet);
                     promise.then(result => {
                         if (result==true){
-                            const promise1 = orderDAO.save(orders);
-                            promise1.then(result => {
-                                if (result==true){
-                                    const promise2 = orderDetailsDAO.save(orderDetails);
-                                    promise2.then(result => {
-                                        if (result==true){
-                                            const promise3 = itemDAO.save(item);
-                                            promise3.then(result => {
-                                                resolve(result);
-                                                pool.releaseConnection(connection);
-                                            }).catch(error=>{
-                                                reject(error);
-                                                pool.releaseConnection(connection);
-                                            });
-                                        }
-                                        pool.releaseConnection(connection);
-                                    }).catch(error=>{
-                                        reject(error);
-                                        pool.releaseConnection(connection);
-                                    });
-                                }
-                                pool.releaseConnection(connection);
-                            }).catch(error=>{
-                                reject(error);
-                                pool.releaseConnection(connection);
-                            });
+                            console.log("sfadfadsfadsfasdfa");
                         }
+                        console.log("dasfad")
+                        resolve(result);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    updateOrderDetails(orderDet: OrderDetailsDTO): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const orderDetDAO = <OrderDetailsDAO> getDAO(DAOTypes.ORDERDETAILS, connection);
+                    const promise = orderDetDAO.update(orderDet);
+                    promise.then(result => {
+                        resolve(result);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    deleteOrderDetail(orderId: string): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const orderDetDAO = <OrderDetailsDAO> getDAO(DAOTypes.ORDERDETAILS, connection);
+                    const promise = orderDetDAO.delete(orderId);
+                    promise.then(result => {
+                        resolve(result);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    findAllOrders(): Promise<Array<OrdersDTO>>{
+
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const ordersDAO = <OrdersDAO> getDAO(DAOTypes.ORDERS, connection);
+                    const promise = ordersDAO.findAll();
+                    promise.then(orders => {
+                        resolve(orders);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    findOrders(id: string): Promise<Array<OrdersDTO>>{
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const ordersDAO = <OrdersDAO> getDAO(DAOTypes.ORDERS, connection);
+                    const promise = ordersDAO.find(id);
+                    promise.then(orders => {
+                        resolve(orders);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    saveOrders(orders: OrdersDTO): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const ordersDAO = <OrdersDAO> getDAO(DAOTypes.ORDERS, connection);
+                    const promise = ordersDAO.save(orders);
+                    promise.then(result => {
+                        if (result==true){
+                            console.log("sfadfadsfadsfasdfa");
+                        }
+                        console.log("dasfad")
+                        resolve(result);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    updateOrders(orders: OrdersDTO): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const ordersDAO = <OrdersDAO> getDAO(DAOTypes.ORDERS, connection);
+                    const promise = ordersDAO.update(orders);
+                    promise.then(result => {
+                        resolve(result);
+                        pool.releaseConnection(connection);
+                    }).catch(error=>{
+                        reject(error);
+                        pool.releaseConnection(connection);
+                    });
+                }
+            });
+        });
+    }
+
+    deleteOrders(id: string): Promise<boolean>{
+        return new Promise((resolve, reject) => {
+            pool.getConnection((err, connection) => {
+                if (err){
+                    reject(err);
+                }else{
+                    const ordersDAO = <OrdersDAO> getDAO(DAOTypes.ORDERS, connection);
+                    const promise = ordersDAO.delete(id);
+                    promise.then(result => {
+                        resolve(result);
                         pool.releaseConnection(connection);
                     }).catch(error=>{
                         reject(error);
